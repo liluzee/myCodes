@@ -50,6 +50,29 @@ vector<int> inputArr(int n)
 int main()
 
 {
-  int n;
-  cin >> n;
+  int n, k;
+  cin >> n >> k;
+
+  vector<pair<int, int>> arr(n);
+  for (int i = 0; i < n; i++)
+  {
+    int tmp1, tmp2;
+    cin >> tmp1 >> tmp2;
+
+    arr[i] = {tmp1, tmp2};
+  }
+
+  sort(arr.begin(), arr.end());
+
+  int p = n - k;
+  pair<int, int> win = arr[p];
+  int cnt = 0;
+  for (int i = 0; i < n; i++)
+  {
+    cout << arr[i].first << " " << arr[i].second << endl;
+    if (arr[i] == win)
+      cnt++;
+  }
+
+  cout << cnt;
 }

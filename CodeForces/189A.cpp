@@ -47,9 +47,31 @@ vector<int> inputArr(int n)
   return ans;
 }
 
+unordered_map<int, int> memo;
+// memoized DP solution
+int answer(int n, int a, int b, int c)
+{
+  if (n == 0)
+    return 0;
+
+  if (n < 0)
+    return INT_MIN;
+  if (memo.count(n) != 0)
+  {
+    return memo[n];
+  }
+  int aUse = 1 + answer(n - a, a, b, c);
+  int bUse = 1 + answer(n - b, a, b, c);
+  int cUse = 1 + answer(n - c, a, b, c);
+
+  memo[n] = max(aUse, max(bUse, cUse));
+  return memo[n];
+}
 int main()
 
 {
-  int n;
-  cin >> n;
+  int n, a, b, c;
+  cin >> n >> a >> b >> c;
+
+  cout << answer(n, a, b, c);
 }
